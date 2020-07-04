@@ -61,11 +61,18 @@ void game_loop(t_game * g)
     if(g->player->score <= 0){
       printf("You lost all your coins !");
       game_end(g);
-    }else if(turn == 5){
+    }else if(turn == 1){
       printf("Game over ! Your coins : %i \n", g->player->score);
       game_end(g);
     }
 
     turn++;
   }
+
+  printf("\n\n --- REMATCH --- \n\n");
+
+  // Rematch
+  t_game * newG = game_init();
+
+  game_loop(newG);
 }
