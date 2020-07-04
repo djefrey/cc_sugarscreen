@@ -78,7 +78,7 @@ void game_loop(t_game * g)
     if(g->player->score <= 0){
       printf("You lost all your coins !");
       game_end(g);
-    }else if(turn == 1){
+    }else if(turn == 6){
       printf("Game over ! Your coins : %i \n", g->player->score);
       game_end(g);
     }else{
@@ -86,7 +86,7 @@ void game_loop(t_game * g)
     }
   }
 
-  printf("\nScoreboard:\nPlayer - Broker\n%s",sb);
+  printf("\n\nScoreboard:\nPlayer - Broker\n%s",sb);
 
   printf("\n\n ----- REMATCH ----- \n\n");
 
