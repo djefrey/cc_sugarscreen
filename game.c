@@ -165,6 +165,7 @@ int player_ask_cards(t_game * g)
         {
             g->player->hand[inhand++] = g->cards[g->indeck++];
             print_player_hand(g->player);
+            printf("\n");
         }
         if (inhand >= 6)
             return 6;
