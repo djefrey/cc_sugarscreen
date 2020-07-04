@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "game.h"
 
@@ -10,9 +11,21 @@ int main()
     return 0;
 }
 
+/* Scoreboard: (47 characters max)
+  Player/Broker
+  
+  14 - 21
+  20 - 19
+  17 - 15
+  10 - 14
+  16 - 20
+  15 - 13
+*/
+
 void game_loop(t_game * g)
 {
   int turn = 1;
+  char sb[64];
 
   while(!is_game_finished(g)){
     printf("\n --- Turn %i ---\n\n", turn);
@@ -52,11 +65,15 @@ void game_loop(t_game * g)
       player_jackpot(g);
 
     }else if(p_hand > g->broker){
-        player_win(g);
+      player_win(g);
 
     }else{
-        player_lost(g);
+      player_lost(g);
     }
+
+    char entry[12];
+    sprintf(entry, "\t%d - %d\n", p_hand, g->broker);
+    strcat(sb, entry);
 
     if(g->player->score <= 0){
       printf("You lost all your coins !");
@@ -64,12 +81,14 @@ void game_loop(t_game * g)
     }else if(turn == 1){
       printf("Game over ! Your coins : %i \n", g->player->score);
       game_end(g);
+    }else{
+      turn++;
     }
-
-    turn++;
   }
 
-  printf("\n\n --- REMATCH --- \n\n");
+  printf("\nScoreboard:\nPlayer - Broker\n%s",sb);
+
+  printf("\n\n ----- REMATCH ----- \n\n");
 
   // Rematch
   t_game * newG = game_init();
